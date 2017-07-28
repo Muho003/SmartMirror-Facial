@@ -1,8 +1,8 @@
 # Face++ to identify a person 
 #download github code
 ```
-$git clone https://github.com/lbaitemple/Summer_2017-.git
-$cd Summer_2017-
+$git clone https://github.com/lbaitemple/facematch.git
+$cd facematch
 ```
 
 
