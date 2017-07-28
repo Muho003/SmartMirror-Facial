@@ -22,5 +22,5 @@ $cp someone.jpg /test/pictures_faces
 
 # how to run the code
 ```
-python  rpi_pic_comp.py 
+$python  rpi_pic_comp.py 
 ```
