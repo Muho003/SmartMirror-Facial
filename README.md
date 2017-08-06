@@ -24,3 +24,8 @@ $cp someone.jpg /test/pictures_faces
 ```
 $python  rpi_pic_comp.py 
 ```
+
+
+#### possible run time error
+###### If you get camera turn into red and nothing happens, "No data received from sensor. Check all connections...", please 
+### make sure you use a USB cable which can supply 250mA current.
