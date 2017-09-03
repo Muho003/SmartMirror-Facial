@@ -7,9 +7,9 @@ import time
 import os
 import picamera
 from os.path import basename
-import FaceMatch as face2
+#import FaceMatch as FaceMatch
 
-class FaceMatch(object):
+class FaceMatch:
     """A customer of ABC Bank with a checking account. Customers have the
     following properties:
 
@@ -19,10 +19,10 @@ class FaceMatch(object):
     """
 
     def __init__(self, sys):
-        this.sys = sys
+        self.sys = sys
 
 
-    def getFilenamesAndClasses(dataset_dir_raw):
+    def getFilenamesAndClasses(self,dataset_dir_raw):
         """ Returns list of image file paths relative to the provided raw dataset directory
             dataset_dir_raw: directory containing subdirectories of JPEGS to use for training
         ex: hand -> rock, paper, scissors
@@ -46,29 +46,29 @@ class FaceMatch(object):
 
 
 
-    def compare(face1, face2):
-       """
-       compare face 1 to face 2 - is face 1 = face2?
-       """
-       payload = {'api_key': 'xT_4ChJTosLQPrxmIPq444uaBp4I8dzM', 'api_secret': 'FKSgyp50IMSCm8d7PdRXQmWDUW0mO4PO'}
-       picture_payload1 = {'image_file1': open(face1, 'rb'), 'image_file2': open(face2, 'rb')}
-       r = requests.post('https://api-us.faceplusplus.com/facepp/v3/compare', params=payload, files=picture_payload1)
+    def compare(self,face1, face2):
+        """
+        compare face 1 to face 2 - is face 1 = face2?
+        """
+        payload = {'api_key': 'xT_4ChJTosLQPrxmIPq444uaBp4I8dzM', 'api_secret': 'FKSgyp50IMSCm8d7PdRXQmWDUW0mO4PO'}
+        picture_payload1 = {'image_file1': open(face1, 'rb'), 'image_file2': open(face2, 'rb')}
+        r = requests.post('https://api-us.faceplusplus.com/facepp/v3/compare', params=payload, files=picture_payload1)
 #        pp = pprint.PrettyPrinter(indent=4)
 #        pp.pprint(r.json())
-       data = r.json()
-       face1=data["faces1"]
-       if (len(face1)==0):
-         return -1
-       else:
-          confidence = data["confidence"]
-          if confidence >= 60:
-              return 1
-          else:
-              return 0
+        data = r.json()
+        face1=data["faces1"]
+        if (len(face1)==0):
+          return -1
+        else:
+           confidence = data["confidence"]
+           if confidence >= 60:
+               return 1
+           else:
+               return 0
 
 
 
-    def getName():
+    def getName(self):
         """  
         main function starts here
         """
@@ -105,7 +105,7 @@ class FaceMatch(object):
             pictures_faces = os.listdir(pictures_faces_path)
 
             for face in pictures_faces:
-                isPerson = compare(picture, path + "/test/pictures_faces/{0}".format(face))
+                isPerson = self.compare(picture, path + "/test/pictures_faces/{0}".format(face))
                 if (isPerson ==1):
                     access = 1
 	            break
@@ -169,7 +169,8 @@ class FaceMatch(object):
             return name
 
 
-    if __name__ == '__main__':
-        fm= face2("OpenFace++")
-        name = fm.getName()
-        print "I found " + name
+if __name__ == '__main__':
+#        fm= FaceMatch()
+    fm= FaceMatch("name")
+    name = fm.getName()
+    print "I found " + name
